@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 27, 2021 lúc 11:59 AM
+-- Thời gian đã tạo: Th7 28, 2021 lúc 05:52 PM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 8.0.2
 
@@ -31,11 +31,11 @@ CREATE TABLE `tbl_activity` (
   `id_activ` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
   `id_activtype` int(10) NOT NULL,
-  `activtitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `activdescribe` text COLLATE utf8_unicode_ci NOT NULL,
-  `activcreatedate` datetime NOT NULL,
-  `activstartdate` date NOT NULL,
-  `activenddate` date NOT NULL
+  `activTitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `activDescribe` text COLLATE utf8_unicode_ci NOT NULL,
+  `activCreateDate` datetime NOT NULL,
+  `activStartDate` date NOT NULL,
+  `activEndDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -49,6 +49,15 @@ CREATE TABLE `tbl_activportal` (
   `portalname` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `tbl_activportal`
+--
+
+INSERT INTO `tbl_activportal` (`id_activportal`, `portalname`) VALUES
+(1, 'Hoạt động đang diễn ra'),
+(2, 'Chuỗi hoạt động'),
+(3, 'Các văn bản khác');
+
 -- --------------------------------------------------------
 
 --
@@ -59,12 +68,19 @@ CREATE TABLE `tbl_activtype` (
   `id_activtype` int(10) NOT NULL,
   `id_activportal` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
-  `activtypetitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `activtypedescribe` text COLLATE utf8_unicode_ci NOT NULL,
-  `activtypecreatedate` datetime NOT NULL,
-  `activtypestartdate` date NOT NULL,
-  `activtypeenddate` date NOT NULL
+  `activtypeTitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `activtypeDescribe` text COLLATE utf8_unicode_ci NOT NULL,
+  `activtypeCreateDate` date NOT NULL,
+  `activtypeStartDate` date NOT NULL,
+  `activtypeEndDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_activtype`
+--
+
+INSERT INTO `tbl_activtype` (`id_activtype`, `id_activportal`, `id_user`, `activtypeTitle`, `activtypeDescribe`, `activtypeCreateDate`, `activtypeStartDate`, `activtypeEndDate`) VALUES
+(1, 1, 2, 'Xuân Tình Nguyện 2021', 'Hoạt động mang tới cái Tết ấm no, vui tươi hơn cho những trẻ em khó khăn', '0000-00-00', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -77,8 +93,8 @@ CREATE TABLE `tbl_comment` (
   `id_dtlactiv` int(10) NOT NULL,
   `id_activ` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
-  `cmtcontent` text COLLATE utf8_unicode_ci NOT NULL,
-  `cmtdate` datetime NOT NULL
+  `cmtContent` text COLLATE utf8_unicode_ci NOT NULL,
+  `cmtDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -91,12 +107,24 @@ CREATE TABLE `tbl_dtl_activity` (
   `id_dtlactiv` int(10) NOT NULL,
   `id_activtype` int(10) NOT NULL,
   `id_user` int(10) NOT NULL,
-  `dtlactivtitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `dtlactivdescribe` text COLLATE utf8_unicode_ci NOT NULL,
-  `dtl_activemodelfile` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `dtlactivstartdate` date NOT NULL,
-  `dtlactivenddate` date NOT NULL
+  `dtlactivTitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `dtlactivDescribe` text COLLATE utf8_unicode_ci NOT NULL,
+  `dtlactivModelFile` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `dtlactivStartDate` date NOT NULL,
+  `dtlactivEndDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_dtl_activity`
+--
+
+INSERT INTO `tbl_dtl_activity` (`id_dtlactiv`, `id_activtype`, `id_user`, `dtlactivTitle`, `dtlactivDescribe`, `dtlactivModelFile`, `dtlactivStartDate`, `dtlactivEndDate`) VALUES
+(1, 1, 2, 'Kế hoạch XTN', 'Kế hoạch XTN giúp Đoàn - Hội trường Đại học Kinh tế có thể hiểu rõ hơn về chương trình của các đơn vị', '', '0000-00-00', '0000-00-00'),
+(2, 1, 4, 'Kế hoạch gây quỹ XTN', 'Kế hoạch gây quỹ để Đoàn - Hội trường Đại học Kinh tế phê duyệt phương án gây quỹ ', '', '0000-00-00', '0000-00-00'),
+(3, 1, 3, 'Dự trù kinh phí XTN', 'Dự trù kinh phí để Đoàn - Hội trường Đại học Kinh tế xem xét khả thi chiến dịch ', '', '0000-00-00', '0000-00-00'),
+(4, 1, 3, 'Ấn phẩm XTN', 'Ấn phẩm phải được duyệt trước khi đơn vị đăng truyền thông', '', '0000-00-00', '0000-00-00'),
+(5, 1, 3, 'Danh sách chiến sĩ', 'Danh sách chi tiết chiến sĩ tham gia XTN của đơn vị', '', '0000-00-00', '0000-00-00'),
+(6, 1, 1, 'Báo cáo tổng kết', 'Báo cáo tổng kết sau chiến dịch XTN của đơn vị', '', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -114,16 +142,32 @@ CREATE TABLE `tbl_dtl_permision` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `tbl_event`
+--
+
+CREATE TABLE `tbl_event` (
+  `id_event` int(10) NOT NULL,
+  `id_user` int(10) NOT NULL,
+  `id_status` int(10) NOT NULL,
+  `eventname` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `eventvenue` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `eventstartdate` datetime NOT NULL,
+  `eventenddate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `tbl_file`
 --
 
 CREATE TABLE `tbl_file` (
   `id_file` int(10) NOT NULL,
   `id_filetype` int(10) NOT NULL,
-  `filetitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `filedescribe` text COLLATE utf8_unicode_ci NOT NULL,
-  `filecontent` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `filecreatedate` date NOT NULL
+  `fileTitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `fileDescribe` text COLLATE utf8_unicode_ci NOT NULL,
+  `fileContent` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `fileCreateDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -138,10 +182,10 @@ CREATE TABLE `tbl_fileactiv` (
   `id_activ` int(10) NOT NULL,
   `id_status` int(10) NOT NULL,
   `id_filetype` int(10) NOT NULL,
-  `f_activtitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `f_activdescribe` text COLLATE utf8_unicode_ci NOT NULL,
-  `f_activcontent` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `f_activcreatedate` date NOT NULL
+  `f_activTitle` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `f_activDescribe` text COLLATE utf8_unicode_ci NOT NULL,
+  `f_activContent` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `f_activCreateDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -152,8 +196,21 @@ CREATE TABLE `tbl_fileactiv` (
 
 CREATE TABLE `tbl_filetype` (
   `id_filetype` int(10) NOT NULL,
-  `ftypename` int(10) NOT NULL
+  `f_typeCode` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `f_typename` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `f_typeDescribe` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_filetype`
+--
+
+INSERT INTO `tbl_filetype` (`id_filetype`, `f_typeCode`, `f_typename`, `f_typeDescribe`) VALUES
+(1, 'KH -TB-TTr', '0', '0'),
+(2, 'HĐ', '0', '0'),
+(3, 'MHT-MTB', '0', '0'),
+(4, 'GCN', '0', '0'),
+(5, 'Khác', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -192,6 +249,15 @@ CREATE TABLE `tbl_permision` (
   `pername` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `tbl_permision`
+--
+
+INSERT INTO `tbl_permision` (`id_per`, `pername`) VALUES
+(1, 'ADMIN L1'),
+(2, 'ADMIN L2'),
+(3, 'USER');
+
 -- --------------------------------------------------------
 
 --
@@ -202,6 +268,16 @@ CREATE TABLE `tbl_status` (
   `id_status` int(10) NOT NULL,
   `sttname` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_status`
+--
+
+INSERT INTO `tbl_status` (`id_status`, `sttname`) VALUES
+(1, 'CHƯA DUYỆT'),
+(2, 'CHỜ DUYỆT'),
+(3, 'DUYỆT THÀNH CÔNG'),
+(4, 'TỪ CHỐI DUYỆT');
 
 -- --------------------------------------------------------
 
@@ -216,6 +292,18 @@ CREATE TABLE `tbl_user` (
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_user`
+--
+
+INSERT INTO `tbl_user` (`id_user`, `id_per`, `username`, `email`, `password`) VALUES
+(1, 1, 'Đoàn Thanh niên', 'doanthanhnien@ueh.edu.vn', '12345678'),
+(2, 1, 'Hội Sinh viên', 'hoisinhvien@ueh.edu.vn', '12345678'),
+(3, 2, 'Nguyễn Thị Thương Nhớ', 'thuongnho@ueh.edu.vn', '12345678'),
+(4, 2, 'Nguyễn Hữu Lộc', 'huuloc@ueh.edu.vn', '12345678'),
+(5, 3, 'Khoa Công nghệ thông tin kinh doanh', 'youthbit@ueh.edu.vn', '12345678'),
+(6, 3, 'Khoa Kế toán', 'youthsoa@ueh.edu.vn', '12345678');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -266,6 +354,13 @@ ALTER TABLE `tbl_dtl_activity`
 ALTER TABLE `tbl_dtl_permision`
   ADD PRIMARY KEY (`id_dtlper`),
   ADD KEY `fk_dtl_per_id_per` (`id_per`);
+
+--
+-- Chỉ mục cho bảng `tbl_event`
+--
+ALTER TABLE `tbl_event`
+  ADD KEY `fk_event_id_user` (`id_user`),
+  ADD KEY `fk_event_id_status` (`id_status`);
 
 --
 -- Chỉ mục cho bảng `tbl_file`
@@ -339,13 +434,13 @@ ALTER TABLE `tbl_activity`
 -- AUTO_INCREMENT cho bảng `tbl_activportal`
 --
 ALTER TABLE `tbl_activportal`
-  MODIFY `id_activportal` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_activportal` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_activtype`
 --
 ALTER TABLE `tbl_activtype`
-  MODIFY `id_activtype` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_activtype` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_comment`
@@ -357,7 +452,7 @@ ALTER TABLE `tbl_comment`
 -- AUTO_INCREMENT cho bảng `tbl_dtl_activity`
 --
 ALTER TABLE `tbl_dtl_activity`
-  MODIFY `id_dtlactiv` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dtlactiv` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_dtl_permision`
@@ -381,7 +476,7 @@ ALTER TABLE `tbl_fileactiv`
 -- AUTO_INCREMENT cho bảng `tbl_filetype`
 --
 ALTER TABLE `tbl_filetype`
-  MODIFY `id_filetype` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_filetype` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_history`
@@ -399,19 +494,19 @@ ALTER TABLE `tbl_notif`
 -- AUTO_INCREMENT cho bảng `tbl_permision`
 --
 ALTER TABLE `tbl_permision`
-  MODIFY `id_per` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_per` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_status`
 --
 ALTER TABLE `tbl_status`
-  MODIFY `id_status` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_status` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -451,6 +546,13 @@ ALTER TABLE `tbl_dtl_activity`
 --
 ALTER TABLE `tbl_dtl_permision`
   ADD CONSTRAINT `fk_dtl_per_id_per` FOREIGN KEY (`id_per`) REFERENCES `tbl_permision` (`id_per`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_event`
+--
+ALTER TABLE `tbl_event`
+  ADD CONSTRAINT `fk_event_id_status` FOREIGN KEY (`id_status`) REFERENCES `tbl_status` (`id_status`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_event_id_user` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `tbl_file`
