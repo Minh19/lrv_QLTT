@@ -38,13 +38,10 @@
                       <td style="padding-right:20px;padding-left:0px">
                         <div class="dropdown form-popup">
                             <i class="fa fa-ellipsis-v" style="color:gray; width: 30px; text-align:center"></i>
-                            <div class="form-container dropdown-content">
-                             
-                              <a href="#" class="btn btndelete">Delete </a>
-                              
-                              <button type="button" class="btn">Mark as read/unread </button>
-                              <button type="button" class="btn">Hide </button>
-                            </div>
+                            <form id="form-delete" method="POST" action="" class="form-container dropdown-content">
+                             @csrf @method('DELETE')
+                              <a href="{{route('HopThuCuaToi.destroy',$HTCT->id_dtlactiv)}}" class="btn btndelete">Delete </a>
+                            </form>
                           </div>
                       </td>
                     </tr>
@@ -60,5 +57,18 @@
 </div>
       </div>
   </div>
+
   <!-- /.content-wrapper -->
+@stop()
+
+@section('js')
+<script>
+    $('.btndelete').click(function(ev){
+      ev.preventDefault();
+      var _href = $(this).attr('href');
+      $('form#form-delete').attr('action',_href)
+      if(confirm('Bạn có muốn xóa không?'))
+      $('form#form-delete').submit();
+    })
+  </script>
 @stop()
