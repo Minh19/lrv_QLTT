@@ -30,10 +30,12 @@ Route::get('/TrinhGuiDuyetVanBan','HomeController@TrinhGuiDuyetVanBan')->name('h
 
 Route::group(['prefix' => 'admin'],function(){
     Route::get('/','AdminController@dashboard')->name('admin.dashboard');
-    
+
     Route::resources([
         'HopThuCuaToi'  => 'HopThuCuaToiController',
         'QuanLyVanBan'  => 'QuanLyVanBanController',
     ]);
+
+    Route::get('/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
 });
 

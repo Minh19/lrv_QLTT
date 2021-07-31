@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 29, 2021 lúc 05:16 PM
+-- Thời gian đã tạo: Th7 31, 2021 lúc 06:23 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 8.0.2
 
@@ -43,7 +43,8 @@ CREATE TABLE `tbl_activity` (
 --
 
 INSERT INTO `tbl_activity` (`id_activ`, `id_user`, `id_activtype`, `activTitle`, `activDescribe`, `activCreateDate`, `activStartDate`, `activEndDate`) VALUES
-(1, 5, 1, 'Xuân Tình Nguyện 2021', 'Hoạt động mang tới cái Tết ấm no hơn cho trẻ em vùng khó khăn', '0000-00-00 00:00:00', '0000-00-00', '0000-00-00');
+(1, 5, 1, 'Xuân Tình Nguyện 2021', 'Hoạt động mang tới cái Tết ấm no hơn cho trẻ em vùng khó khăn', '0000-00-00 00:00:00', '0000-00-00', '0000-00-00'),
+(2, 2, 1, 'Xuân tình nguyện 2018\r\n', '', '0000-00-00 00:00:00', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -87,7 +88,10 @@ CREATE TABLE `tbl_activtype` (
 --
 
 INSERT INTO `tbl_activtype` (`id_activtype`, `id_activportal`, `id_user`, `activtypeTitle`, `activtypeDescribe`, `activtypeCreateDate`, `activtypeStartDate`, `activtypeEndDate`) VALUES
-(1, 1, 2, 'Xuân Tình Nguyện', 'Hoạt động mang tới cái Tết ấm no, vui tươi hơn cho những trẻ em khó khăn', '0000-00-00', '0000-00-00', '0000-00-00');
+(1, 1, 2, 'Xuân Tình Nguyện', 'Hoạt động mang tới cái Tết ấm no, vui tươi hơn cho những trẻ em khó khăn', '0000-00-00', '0000-00-00', '0000-00-00'),
+(2, 2, 2, 'Mùa hè xanh', '', '0000-00-00', '0000-00-00', '0000-00-00'),
+(3, 2, 1, 'Cuộc thi học thuật', '', '0000-00-00', '0000-00-00', '0000-00-00'),
+(5, 3, 4, 'Văn bản Họp', '', '0000-00-00', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -208,12 +212,12 @@ CREATE TABLE `tbl_fileactiv` (
 --
 
 INSERT INTO `tbl_fileactiv` (`id_fileactiv`, `id_dtlactiv`, `id_activ`, `id_status`, `id_filetype`, `f_activTitle`, `f_activDescribe`, `f_activContent`, `f_activCreateDate`) VALUES
-(1, 1, 1, 3, 1, 'Kế hoạch XTN_Khoa BIT', 'Đây là Kế hoạch XTN của Khoa Công nghệ thông tin kinh doanh', '', '0000-00-00'),
-(2, 2, 1, 1, 1, 'Kế hoạch gây quỹ XTN_Khoa BIT', 'Đây là Kế hoạch gây quỹ XTN của Khoa Công nghệ thông tin kinh doanh', '', '0000-00-00'),
-(3, 3, 1, 1, 1, 'Dự trù kinh phí XTN_Khoa BIT', 'Đây là Dự trù kinh phí XTN của Khoa Công nghệ thông tin kinh doanh', '', '0000-00-00'),
-(4, 4, 1, 1, 5, 'Ấn phẩm XTN_Khoa BIT', 'Đây là Ấn phẩm XTN của Khoa Công nghệ thông tin kinh doanh', '', '0000-00-00'),
-(5, 5, 1, 1, 5, 'Danh sách chiến sĩ_Khoa BIT', 'Đây là Danh sách chiến sĩ XTN của Khoa Công nghệ thông tin kinh doanh', '', '0000-00-00'),
-(6, 6, 1, 1, 5, 'Báo cáo tổng kết_Khoa BIT', 'Đây là Báo cáo tổng kết XTN của Khoa Công nghệ thông tin kinh doanh', '', '0000-00-00');
+(1, 1, 1, 3, 1, 'Kế hoạch XTN_Khoa BIT', 'Đây là Kế hoạch XTN của Khoa Công nghệ thông tin kinh doanh', '', '2020-12-01'),
+(2, 2, 1, 3, 1, 'Kế hoạch gây quỹ XTN_Khoa BIT', 'Đây là Kế hoạch gây quỹ XTN của Khoa Công nghệ thông tin kinh doanh', '', '2020-12-10'),
+(3, 3, 1, 2, 1, 'Dự trù kinh phí XTN_Khoa BIT', 'Đây là Dự trù kinh phí XTN của Khoa Công nghệ thông tin kinh doanh', '', '2020-12-20'),
+(4, 4, 1, 2, 5, 'Ấn phẩm XTN_Khoa BIT', 'Đây là Ấn phẩm XTN của Khoa Công nghệ thông tin kinh doanh', '', '2020-12-25'),
+(5, 5, 1, 2, 5, 'Danh sách chiến sĩ_Khoa BIT', 'Đây là Danh sách chiến sĩ XTN của Khoa Công nghệ thông tin kinh doanh', '', '2020-12-30'),
+(6, 6, 1, 4, 5, 'Báo cáo tổng kết_Khoa BIT', 'Đây là Báo cáo tổng kết XTN của Khoa Công nghệ thông tin kinh doanh', '', '2021-01-10');
 
 -- --------------------------------------------------------
 
@@ -455,7 +459,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT cho bảng `tbl_activity`
 --
 ALTER TABLE `tbl_activity`
-  MODIFY `id_activ` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_activ` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_activportal`
@@ -467,7 +471,7 @@ ALTER TABLE `tbl_activportal`
 -- AUTO_INCREMENT cho bảng `tbl_activtype`
 --
 ALTER TABLE `tbl_activtype`
-  MODIFY `id_activtype` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_activtype` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_comment`

@@ -9,7 +9,7 @@
                 <table class="table">
                   <thead >
                     <tr>
-                      <th style="width: 5px; padding-right:0px">#</th>
+                      
                       <th style="padding-right:0px">Tiêu đề văn bản</th>
                       <th style="padding-right:0px;padding-left:0px">Đơn vị gửi duyệt</th>
                       <th style="padding-right:0px;padding-left:0px">Ngày gửi duyệt</th>
@@ -18,55 +18,46 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($data as $HTCT)
                     <tr>
-                      <td>1.</td>
-                      <td><a href="#"style="color: black">Kế hoạch Chiến dịch MHX</a></td>
-                      <td style="padding-right:0px;padding-left:0px">Khoa CNTT-KD</td>
-                      <td style="padding-right:0px;padding-left:0px">18 / 09 / 2021</td>                      
-                      <td><span class="badge bg-success">Duyệt thành công</span></td>
+                      
+                      <td><a href="{{route('CTHD',$HTCT->id_dtlactiv )}}"style="color: black">{{$HTCT->dtlactivTitle}}</a></td>
+                      <td style="padding-right:0px;padding-left:0px">{{$HTCT->username}}</td>
+                      <td style="padding-right:0px;padding-left:0px">{{$HTCT->f_activCreateDate}}</td>                      
+                      <td>
+                        @if($HTCT->id_status == 1)
+                          <span class="badge bg-secondary">{{$HTCT->sttname}}</span>
+                        @elseif($HTCT->id_status == 2)
+                        <span class="badge bg-warning">{{$HTCT->sttname}}</span>
+                        @elseif($HTCT->id_status == 3)
+                        <span class="badge bg-success">{{$HTCT->sttname}}</span>
+                        @else
+                        <span class="badge bg-danger">{{$HTCT->sttname}}</span>
+                        @endif
+                      </td>
                       <td style="padding-right:20px;padding-left:0px">
                         <div class="dropdown form-popup">
                             <i class="fa fa-ellipsis-v" style="color:gray; width: 30px; text-align:center"></i>
-                            <form class="form-container dropdown-content">
-                              <button type="button" class="btn">Delete </button>
-                              <button type="button" class="btn">Archieve</button>
+                            <div class="form-container dropdown-content">
+                             
+                              <a href="#" class="btn btndelete">Delete </a>
+                              
                               <button type="button" class="btn">Mark as read/unread </button>
                               <button type="button" class="btn">Hide </button>
-                            </form>
+                            </div>
                           </div>
                       </td>
                     </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td><a href="#"style="color: black">Kế hoạch Chiến dịch MHX</a></td>
-                      <td style="padding-right:0px;padding-left:0px">Khoa Tài Chính </td>
-                      <td style="padding-right:0px;padding-left:0px">18 / 09 / 2021</td>                      
-                      <td><span class="badge bg-success">Duyệt thành công</span></td>
-                      <td style="padding-right:20px;padding-left:0px">
-                          <div class="dropdown form-popup">
-                            <i class="fa fa-ellipsis-v" style="color:gray; width: 30px; text-align:center"></i>
-                            <form class="form-container dropdown-content">
-                              <button type="button" class="btn">Delete </button>
-                              <button type="button" class="btn">Archieve</button>
-                              <button type="button" class="btn">Mark as read/unread </button>
-                              <button type="button" class="btn">Hide </button>
-                            </form>
-                          </div>
-                      </td>
-                    </tr>              
+                    @endforeach
                   </tbody>
                 </table>
               </div> 
             </div>
               <!-- /.card-body -->
             <br>
-            <ul class="pagination pagination-sm float-right">
-              <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-            </ul>
+<div class="pagination pagination-sm float-right">
+  {{$data->appends(request()->all())->links()}}
+</div>
       </div>
   </div>
   <!-- /.content-wrapper -->

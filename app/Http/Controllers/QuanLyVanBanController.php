@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\QuanLyVanBan;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class QuanLyVanBanController extends Controller
 {
     /**

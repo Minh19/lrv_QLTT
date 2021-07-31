@@ -19,11 +19,11 @@
                 <table class="table p-0">
                     <tr>
                       <th class="col-3">Loại văn bản</th>
-                      <td>Ấn phẩm cuộc thi</td>
+                      <td>{{$data->f_activTitle}}</td>
                     </tr>
                     <tr>
                       <th>Mô tả ngắn gọn</th>
-                      <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</td>
+                      <td>{{$data->f_activDescribe}}</td>
                     </tr>
                     <tr>
                       <th>Tệp tin gửi duyệt </th>
