@@ -61,6 +61,18 @@
                 <!-- Messages Dropdown Menu -->
                
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                </li>
+
+
+
+
+
+
                 <!-- Notifications Dropdown Menu -->
                 {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="" href="#" role="button">
@@ -221,5 +233,7 @@
 
     <script src="{{url('public/ad123')}}/dist/polipop.js"></script> <!-- virtual file stored in memory and served by webpack-dev-server -->
     <script src="{{url('public/ad123')}}/assets/js/app.js"></script>
+
+@yield('js')
 </body>
 </html>

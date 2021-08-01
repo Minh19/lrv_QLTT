@@ -7,6 +7,7 @@ use App\Models\tbl_activity;
 use App\Models\tbl_user;
 use App\Models\tbl_fileactiv;
 use App\Models\tbl_status;
+use App\Models\tbl_activtype;
 
 
 
@@ -29,8 +30,8 @@ class HopThuCuaToiController extends Controller
         ->JOIN ('tbl_fileactiv', 'tbl_fileactiv.id_dtlactiv','=', 'tbl_dtl_activity.id_dtlactiv')   
         ->JOIN ('tbl_status', 'tbl_status.id_status','=', 'tbl_fileactiv.id_status')
         ->orderByRaw('f_activCreateDate DESC')
-        // ->get();
-        ->paginate(5);
+         //->get();
+         ->paginate(3);
     
         // $data = HopThuCuaToi::orderBy('f_activCreateDate','DESC')-> paginate(5);
             return view('admin.HopThuCuaToi.index',compact('data'));
@@ -66,11 +67,22 @@ class HopThuCuaToiController extends Controller
      */
     public function show($id_dtlactiv)
     {
-        $data = tbl_fileactiv::where('id_dtlactiv', '=', $id_dtlactiv)->select('*')->first();
-      return view('admin/HopThuCuaToi/ChiTietHoatDong',compact('data'));
+        $data = DB::table('tbl_dtl_activity')
+        ->JOIN ('tbl_user', 'tbl_user.id_user','=', 'tbl_dtl_activity.id_user')
+        ->JOIN ('tbl_fileactiv', 'tbl_fileactiv.id_dtlactiv','=', 'tbl_dtl_activity.id_dtlactiv')   
+        ->JOIN ('tbl_status', 'tbl_status.id_status','=', 'tbl_fileactiv.id_status')
+        ->JOIN ('tbl_activtype', 'tbl_activtype.id_activtype' ,'=' ,'tbl_dtl_activity.id_activtype')
+        ->JOIN ('tbl_activity' , 'tbl_activity.id_activtype','=' ,'tbl_activtype.id_activtype')
+        ->JOIN('tbl_comment','tbl_comment.id_dtlactiv','=','tbl_dtl_activity.id_dtlactiv')
+        ->where('tbl_dtl_activity.id_dtlactiv', '=', $id_dtlactiv)
+       
+        ->select('activTitle', 'f_activCreateDate', 'username', 'dtlactivTitle', 'sttname', 'f_activTitle', 'f_activDescribe','activtypeTitle','cmtContent')->first();
+   
+        return view('admin/HopThuCuaToi/ChiTietHoatDong',compact('data'));
     }
 
-    /**
+
+/**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\HopThuCuaToi  $hopThuCuaToi
@@ -99,8 +111,15 @@ class HopThuCuaToiController extends Controller
      * @param  \App\Models\HopThuCuaToi  $hopThuCuaToi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HopThuCuaToi $hopThuCuaToi)
+    public function destroy( $id_dtlactiv)
     {
-        //
+        $data = DB::table('tbl_dtl_activity')
+        ->JOIN ('tbl_user', 'tbl_user.id_user','=', 'tbl_dtl_activity.id_user')
+        ->JOIN ('tbl_fileactiv', 'tbl_fileactiv.id_dtlactiv','=', 'tbl_dtl_activity.id_dtlactiv')   
+        ->JOIN ('tbl_status', 'tbl_status.id_status','=', 'tbl_fileactiv.id_status')
+        ->where('tbl_dtl_activity.id_dtlactiv', '=', $id_dtlactiv);
+        
+        $data->delete();
+        return redirect()->route('HopThuCuaToi.index')->with('success','Xóa thành công');
     }
 }
