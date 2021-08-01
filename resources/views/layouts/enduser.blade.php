@@ -138,7 +138,7 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                  <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        {{-- <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 username">Khoa CNTT-KD</span>
                                 <i class="fas fa-user"></i>
@@ -159,6 +159,74 @@
                                     Logout
                                 </a>
                             </div>
+                        </li> --}}
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            @if(Route::has("login"))
+                                @auth
+                                    @if(Auth::user()->utype === "ADMIN")
+                                        <li class="nav-item dropdown no-arrow mx-1">
+                                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="mr-2 username">{{Auth::user()->name}}</span>
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            <!-- Dropdown - User Information -->
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                                <a class="dropdown-item" href="profile_user.html">
+                                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Profile
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Settings
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Đăng xuất
+                                                    </a>
+                
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li class="nav-item dropdown no-arrow mx-1">
+                                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="mr-2 username">{{Auth::user()->name}}</span>
+                                                <i class="fas fa-user"></i>
+                                            </a>
+                                            <!-- Dropdown - User Information -->
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                                <a class="dropdown-item" href="profile_user.html">
+                                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Profile
+                                                </a>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Settings
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                {{-- <a href="{{ route('logout') }}" onclick="event.prevenTDefault(); document.getElementById('logout-form').submit();">
+                                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                    Logout
+                                                </a>
+                                                <form id="logout-form" method="POST" action="{{ route('logout') }}" >
+                                                    {{ csrf_field() }}
+                                                </form> --}}
+                                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Đăng xuất
+                                                    </a>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                        @csrf
+                                                    </form>
+                                            </div>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="nav-link"> <a href="{{route("login")}}"> Đăng nhập </a>
+                                    {{-- <li class="menu-item"> <a href="{{route("register")}}"> Đăng ký </a> --}}
+                                @endif
+                            @endif
                         </li>
 
                     </ul>

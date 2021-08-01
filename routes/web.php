@@ -39,3 +39,23 @@ Route::group(['prefix' => 'admin'],function(){
     Route::get('/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
 });
 
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+
+// USER
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+
+});
+// ADMIN
+Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
+    Route::get('/admin','AdminController@dashboard')->name('admin.dashboard');
+
+    Route::resources([
+        'HopThuCuaToi'  => 'HopThuCuaToiController',
+        'QuanLyVanBan'  => 'QuanLyVanBanController',
+    ]);
+
+    Route::get('/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
+});

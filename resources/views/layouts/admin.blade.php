@@ -62,7 +62,7 @@
                
 
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="" href="#" role="button">
                     <i class="nav-icon far fa-user-circle"></i> Hello ABC
                     </a>
@@ -71,7 +71,30 @@
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                     <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
-                </li>
+                </li> --}}
+
+                @if(Route::has("login"))
+                    @auth
+                        @if(Auth::user()->utype === "ADMIN")
+                            <li class="nav-item">
+                                <a class="nav-link" data-widget="" href="#" role="button">
+                                <i class="nav-icon far fa-user-circle">{{Auth::user()->name}}</i> 
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-widget="control-sidebar" data-slide="true" role="button" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-link"> <a href="{{route("login")}}"> Đăng nhập </a>
+                        {{-- <li class="menu-item"> <a href="{{route("register")}}"> Đăng ký </a> --}}
+                    @endif
+                @endif
             </ul>
         </nav>
         <!-- /.navbar -->
