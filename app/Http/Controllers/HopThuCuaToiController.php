@@ -76,8 +76,8 @@ class HopThuCuaToiController extends Controller
         ->JOIN('tbl_comment','tbl_comment.id_dtlactiv','=','tbl_dtl_activity.id_dtlactiv')
         ->where('tbl_dtl_activity.id_dtlactiv', '=', $id_dtlactiv)
        
-        ->select('activTitle', 'f_activCreateDate', 'username', 'dtlactivTitle', 'sttname', 'f_activTitle', 'f_activDescribe','activtypeTitle','cmtContent')->first();
-   
+        ->select('tbl_dtl_activity.id_dtlactiv', 'tbl_activity.id_activ', 'tbl_user.id_user', 'activTitle', 'f_activCreateDate', 'username', 'dtlactivTitle', 'sttname', 'f_activTitle', 'f_activDescribe','activtypeTitle','cmtContent')->first();
+        
         return view('admin/HopThuCuaToi/ChiTietHoatDong',compact('data'));
     }
 

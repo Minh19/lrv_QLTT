@@ -28,16 +28,16 @@ Route::get('/TrinhGuiDuyetVanBan','HomeController@TrinhGuiDuyetVanBan')->name('h
 
 */
 
-Route::group(['prefix' => 'admin'],function(){
-    Route::get('/','AdminController@dashboard')->name('admin.dashboard');
+// Route::group(['prefix' => 'admin'],function(){
+//     Route::get('/','AdminController@dashboard')->name('admin.dashboard');
 
-    Route::resources([
-        'HopThuCuaToi'  => 'HopThuCuaToiController',
-        'QuanLyVanBan'  => 'QuanLyVanBanController',
-    ]);
+//     Route::resources([
+//         'HopThuCuaToi'  => 'HopThuCuaToiController',
+//         'QuanLyVanBan'  => 'QuanLyVanBanController',
+//     ]);
 
-    Route::get('/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
-});
+//     Route::get('/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
+// });
 
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -53,9 +53,13 @@ Route::middleware(['auth:sanctum', 'verified', 'authadmin'])->group(function(){
     Route::get('/admin','AdminController@dashboard')->name('admin.dashboard');
 
     Route::resources([
-        'HopThuCuaToi'  => 'HopThuCuaToiController',
-        'QuanLyVanBan'  => 'QuanLyVanBanController',
+        'admin/HopThuCuaToi'  => 'HopThuCuaToiController',
+        'admin/QuanLyVanBan'  => 'QuanLyVanBanController',
     ]);
 
-    Route::get('/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
+    Route::get('admin/HopThuCuaToi/{id_dtlactiv}','HopThuCuaToiController@show')->name('CTHD');
 });
+
+Route::resources([
+    '/admin/comment'  => 'CommentController',
+]);

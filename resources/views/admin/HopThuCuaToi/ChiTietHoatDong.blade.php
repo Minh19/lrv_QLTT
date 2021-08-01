@@ -53,43 +53,12 @@
               </div>
             </div>
             <div class="card mb-10">
-                <div class="row">
-                    <div class="col-12">
-                        <p class="mt-2 mb-1 mb-3 mx-4" style="position: absolute;height: 30px;font-family: Mulish;font-style: normal;font-weight: bold;font-size: 24px;line-height: 30px;letter-spacing: 0.4px;color: #173F7C;">Bình luận/ Đánh giá</p>
-                    </div>
-                    <div class="col-12"><p class="mt-6 mx-7">0 bình luận</p></div>
-                </div>
-                <div class="card-body ">
-                    <div class="row mx-2" id="phantudiv">
-                        <div class=" col-8">
-                            <textarea rows="2" cols="60" id="texterea" placeholder="Nhập bình luận/Đánh giá"></textarea>
-                        </div>
-                        <div class="col-4">
-                            <section class="overlay">
-                            <button type="submit" class="btn btn-info btn-sm mb-4"  style="color: #0016DF; font-weight: bold;">GỬI ĐÁNH GIÁ</button>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 ml-0 pl-0 mr-5">
-                        <div class="typing text-success"></div>
-                            <ul class="comment__box">
-                                <li class="comment" style="list-style-type: none">
-                                    <div class="mb-2 ml-3 mr-9" style="background-color: #f2f2f2">
-                                        <div class="card-body">
-                                            <h6 style="font-weight: bold;">{{$data->username}}</h6>
-                                            <p>{{$data->cmtContent}}</p>
-                                            <div>
-                                                <i class="far fa-clock"></i>
-                                                <small>11:30 PM</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                
+               <?php use App\Http\Controllers\CommentController;
+               echo CommentController::create($data); ?>
+
+                <?php echo CommentController::index($data); ?>
+                
                 </div>  
             </div>
         </div>
